@@ -20,30 +20,7 @@ Adhoc is a command-line tool designed to automatically document changes in your 
 - **Automatic Documentation**: Generates explanations for code changes using a Language Learning Model (LLM).
 - **Multiple Output Formats**: Supports documentation in LaTeX, Markdown, and Word formats.
 - **Version Control Integration**: Detects code changes and commits through simple commands.
-- **Configurable Settings**: Allowr:
-1. **Consistent Naming Conventions:** The function names and variable names should follow con-
-sistent naming conventions. For example, in ‘classify eeg files‘, all variables start with lowercase letters
-except for the function name which starts with uppercase. Consider making the function name start with
-lowercase to match the variable naming convention. 2. **Constant Values:** There are a few constant
-values like ‘image size‘ and ‘noise threshold‘ that could be defined as named constants. This makes the
-code more readable and maintainable. 3. **Comments:** While there is some commenting in the code,
-adding more comments will make it easier for other developers to understand your thought process and
-any potential issues. 4. **Error Handling:** The code assumes that all files can be processed correctly.
-Adding some error handling mechanisms will ensure robustness against unexpected input or exceptions.
-5. **Type Hints:** Although the function parameters in ‘classify spectra images‘ and ‘classify eeg files‘
-have type hints, the return types are not specified. Adding return types where applicable can make the
-code more self-explanatory. 6. **Function Signatures:** The functions have generic names that may not
-be descriptive enough to understand their purpose from the function signature alone. Consider renaming
-them to something more descriptive. 7. **Global Variables:** Although not necessary in this case, avoid
-using global variables if possible. They can sometimes lead to confusion and harder-to-debug code. 8.
-**Code Organization:** The ‘compute eeg spectra‘ function is called from within the loop where images
-are being processed. Consider moving it outside of the loop for better code organization. 9. **Optimize
-I/O Operations:** There are multiple file operations like reading and writing files in a loop. Consider
-using efficient methods to read/write files, such as using ‘with open‘ context manager or batching multiple
-file operations together. 10. **Documentation:** Adding documentation for the functions can be helpful
-for other developers who may not be familiar with the codebase. This can include descriptions of the
-function parameters and return values where applicable.
-3s customization of output formats and author information via a configuration file.
+- **Configurable Settings**: Allows customization of output formats and author information via a configuration file.
 - **Extensible Design**: Modular structure makes it easy to extend functionalities.
 
 ## Installation
