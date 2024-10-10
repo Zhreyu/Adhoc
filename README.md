@@ -17,7 +17,7 @@ Adhoc is a command-line tool designed to automatically document changes in your 
 - [Acknowledgements](#acknowledgements)
 
 ## Features
-- **Automatic Documentation**: Generates explanations for code changes using a Language Learning Model (LLM).
+- **Automatic Documentation**: Generates explanations for code changes using a local Large language models (LLMs).
 - **Multiple Output Formats**: Supports documentation in LaTeX, Markdown, and Word formats.
 - **Version Control Integration**: Detects code changes and commits through simple commands.
 - **Configurable Settings**: Allows customization of output formats and author information via a configuration file.
