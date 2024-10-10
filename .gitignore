@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+.adhoc/
+adhoc_documentation.tex

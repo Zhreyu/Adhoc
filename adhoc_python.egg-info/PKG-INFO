@@ -1,0 +1,152 @@
+Metadata-Version: 2.1
+Name: adhoc-python
+Version: 1.0.1
+Summary: Auto Document Codebase Changes in LaTeX, Markdown, or Word
+Home-page: https://github.com/Zhreyu/adhoc
+Author: Shreyas S
+Author-email: Zhreyas1@example.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: jinja2>=3.1.4
+Requires-Dist: requests>=2.32.3
+Requires-Dist: watchdog>=5.0.3
+Requires-Dist: python-docx>=1.1.2
+Requires-Dist: ollama
+
+
+# Adhoc: Auto-Documenting Codebase Changes
+
+Adhoc is a command-line tool designed to automatically document changes in your codebase. By integrating with local language models, it generates detailed explanations of code modifications and compiles them into professional documentation formats such as LaTeX, Markdown, or Word. This tool streamlines the documentation process, making it effortless for developers to maintain up-to-date records of their code evolution.
+
+## Table of Contents
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Initialization](#initialization)
+  - [Committing Changes](#committing-changes)
+  - [Generating Documentation](#generating-documentation)
+  - [Configuration](#configuration)
+- [Requirements](#requirements)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+
+## Features
+- **Automatic Documentation**: Generates explanations for code changes using a Language Learning Model (LLM).
+- **Multiple Output Formats**: Supports documentation in LaTeX, Markdown, and Word formats.
+- **Version Control Integration**: Detects code changes and commits through simple commands.
+- **Configurable Settings**: Allowr:
+1. **Consistent Naming Conventions:** The function names and variable names should follow con-
+sistent naming conventions. For example, in ‘classify eeg files‘, all variables start with lowercase letters
+except for the function name which starts with uppercase. Consider making the function name start with
+lowercase to match the variable naming convention. 2. **Constant Values:** There are a few constant
+values like ‘image size‘ and ‘noise threshold‘ that could be defined as named constants. This makes the
+code more readable and maintainable. 3. **Comments:** While there is some commenting in the code,
+adding more comments will make it easier for other developers to understand your thought process and
+any potential issues. 4. **Error Handling:** The code assumes that all files can be processed correctly.
+Adding some error handling mechanisms will ensure robustness against unexpected input or exceptions.
+5. **Type Hints:** Although the function parameters in ‘classify spectra images‘ and ‘classify eeg files‘
+have type hints, the return types are not specified. Adding return types where applicable can make the
+code more self-explanatory. 6. **Function Signatures:** The functions have generic names that may not
+be descriptive enough to understand their purpose from the function signature alone. Consider renaming
+them to something more descriptive. 7. **Global Variables:** Although not necessary in this case, avoid
+using global variables if possible. They can sometimes lead to confusion and harder-to-debug code. 8.
+**Code Organization:** The ‘compute eeg spectra‘ function is called from within the loop where images
+are being processed. Consider moving it outside of the loop for better code organization. 9. **Optimize
+I/O Operations:** There are multiple file operations like reading and writing files in a loop. Consider
+using efficient methods to read/write files, such as using ‘with open‘ context manager or batching multiple
+file operations together. 10. **Documentation:** Adding documentation for the functions can be helpful
+for other developers who may not be familiar with the codebase. This can include descriptions of the
+function parameters and return values where applicable.
+3s customization of output formats and author information via a configuration file.
+- **Extensible Design**: Modular structure makes it easy to extend functionalities.
+
+## Installation
+To install Adhoc, you can use pip:
+```bash
+pip install adhoc-python
+```
+Ensure you have the necessary dependencies listed in the `requirements.txt` file.
+
+## Usage
+Adhoc provides a set of commands to initialize your project, commit changes, generate documentation, and configure settings. Below is an explanation of each command and how to use it.
+
+### Initialization
+Before using Adhoc, you need to initialize your project:
+```bash
+adhoc init --model "your ollama model"
+```
+**What it does**:
+- Creates a `.Adhoc` directory in your project root to store configurations and databases.
+- Initializes a SQLite database to track code changes.
+- Initializes the whole code to work with your choice of LLM and then generates a codebase summary for context.
+
+### Committing Changes
+After making changes to your codebase, use the following command to commit those changes and generate explanations:
+```bash
+adhoc commit -m "Your commit message"
+```
+**Options**:
+- `-m, --message`: (Optional) A commit message describing the changes.
+
+**What it does**:
+- Detects changes since the last commit by comparing snapshots.
+- Generates explanations for the changes using the LLM, incorporating your commit message if provided.
+- Stores the changes and explanations in the database for future reference.
+
+### Generating Documentation
+To create documentation of your codebase and its changes, run:
+```bash
+adhoc generate
+```
+**What it does**:
+- Retrieves the codebase summary and change explanations from the database.
+- Generates a documentation file in the format specified in your configuration (latex, markdown, or word).
+- The output file (`documentation.tex`, `documentation.md`, or `documentation.docx`) is created in your project directory.
+
+### Configuration
+Customize Adhoc settings using the `adhoc config` command:
+```bash
+adhoc config -d md -u "Your Name"
+```
+**Options**:
+- `-d, --document-format`: Sets the output document format. Accepts `md` for Markdown, `tex` for LaTeX, or `word` for Word documents.
+- `-u, --username`: Sets the author name to be used in the documentation.
+
+**What it does**:
+- Updates the configuration file (`config.json` in the `.Adhoc` directory) with your preferences.
+- The changes affect how documentation is generated and personalized.
+
+**Example**:
+```bash
+adhoc config -d word -u "Shreyas"
+```
+- Sets the output format to Word.
+- Sets the author name to "Shreyas".
+
+## Requirements
+- Python 3.6 or higher
+
+**Dependencies**:
+- `jinja2`
+- `requests`
+- `watchdog`
+- `python-docx` (for Word document generation)
+
+Additional dependencies are listed in `requirements.txt`.
+
+## Contributing
+Contributions are welcome! Please open an issue or submit a pull request on GitHub.
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+## A Reflective Note
+> "Life is an ad hoc affair. It has to be improvised all the time because of the hard fact that everything we do changes what is. This is distressing to people who would like to see things beautifully planned out and settled once and for all. That cannot be."  
+> ― Jane Jacobs
+
+
+Happy coding!
