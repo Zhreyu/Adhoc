@@ -1,0 +1,3 @@
+[
+    .../'generate-documentation', {author_name: args[string], output_format: args[string]}
+]
