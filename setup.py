@@ -19,6 +19,7 @@ setup(
         'watchdog>=5.0.3',       # Updated to a compatible version
         'python-docx>=1.1.2',
         'ollama'
+        'fastapi[standard]', # For API
         # Removed 'argparse' as it's part of the standard library for Python >=3.2
     ],
     author='Shreyas S',
