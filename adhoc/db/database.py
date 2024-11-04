@@ -6,7 +6,7 @@ DB_PATH = '.Adhoc/adhoc.db'
 def get_connection():
     conn = sqlite3.connect(DB_PATH)
     return conn
-
+#initialize_database() function is used to create the tables in the database.
 def initialize_database():
     conn = get_connection()
     cursor = conn.cursor()
@@ -73,7 +73,7 @@ def save_explanations(explanations):
         ''', (item['file_path'], item['explanation']))
     conn.commit()
     conn.close()
-
+#GET_EXPLANATIONS() function is used to retrieve all explanations from the database.
 def get_explanations():
     """
     Retrieve all explanations from the database.
