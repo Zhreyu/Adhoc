@@ -3,6 +3,9 @@
 
 Adhoc is a command-line tool designed to automatically document changes in your codebase. By integrating with local language models, it generates detailed explanations of code modifications and compiles them into professional documentation formats such as LaTeX, Markdown, or Word. This tool streamlines the documentation process, making it effortless for developers to maintain up-to-date records of their code evolution.
 
+[![PyPI Downloads](https://static.pepy.tech/badge/adhoc-python)](https://pepy.tech/projects/adhoc-python)
+
+
 Watch the demo video to see Adhoc in action:
 
 ![Adhoc Demo](adhoc_demo.gif)
