@@ -6,6 +6,7 @@ from .commands.init import init_command
 from .commands.commit import commit_command
 from .commands.generate import generate_command
 from .commands.config import config_command  # New import
+from .commands.startapi import run_server_command
 
 def main():
     parser = argparse.ArgumentParser(
@@ -39,6 +40,17 @@ def main():
                                help='Set the output document format (md, tex, word)')
     parser_config.add_argument('-u', '--username', type=str, help='Set the author username')
     parser_config.set_defaults(func=config_command)
+
+    #? Start API command
+    parser_startapi = subparsers.add_parser('startapi', help='Start the FastAPI server')
+
+    # Add arguments for host, reloads, worker and port
+    parser_startapi.add_argument('-p', '--port', type=int, default=8000, help='Port number to run the server on')
+    parser_startapi.add_argument('-H', '--host', type=str, default='0.0.0.0', help='Host address to bind to')
+    parser_startapi.add_argument('-r', '--reload', action='store_true', help='Enable auto-reload')
+    parser_startapi.add_argument('-w', '--workers', type=int, default=1, help='Number of worker processes')
+
+    parser_startapi.set_defaults(func=run_server_command)
 
     # Parse arguments
     args = parser.parse_args()
