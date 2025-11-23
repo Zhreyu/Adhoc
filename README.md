@@ -10,6 +10,7 @@ Watch the demo video to see Adhoc in action:
 
 ![Adhoc Demo](adhoc_demo.gif)
 
+
 ## Table of Contents
 - [Features](#features)
 - [Installation](#installation)
@@ -149,4 +150,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 > ― Jane Jacobs
 
 
-Happy coding!
+Happy coding!!
