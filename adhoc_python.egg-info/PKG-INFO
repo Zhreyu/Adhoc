@@ -38,10 +38,11 @@ Watch the demo video to see Adhoc in action:
 - [Acknowledgements](#acknowledgements)
 
 ## Features
-- **Automatic Documentation**: Generates explanations for code changes using a local Large language models (LLMs).
+- **Automatic Documentation**: Generates explanations for code changes using Large Language Models (LLMs).
+- **Multiple LLM Providers**: Supports both local Ollama models and OpenAI-compatible APIs (OpenAI, OpenRouter, LiteLLM, etc.).
 - **Multiple Output Formats**: Supports documentation in LaTeX, Markdown, and Word formats.
 - **Version Control Integration**: Detects code changes and commits through simple commands.
-- **Configurable Settings**: Allows customization of output formats and author information via a configuration file.
+- **Configurable Settings**: Allows customization of LLM provider, API keys, output formats, and author information via a configuration file.
 - **Extensible Design**: Modular structure makes it easy to extend functionalities.
 
 ## Installation
@@ -63,6 +64,27 @@ adhoc init --model "your ollama model"
 - Creates a `.Adhoc` directory in your project root to store configurations and databases.
 - Initializes a SQLite database to track code changes.
 - Initializes the whole code to work with your choice of LLM and then generates a codebase summary for context.
+- By default, Adhoc uses Ollama for local LLM inference. You can configure it to use OpenAI-compatible APIs (see Configuration section below).
+
+### LLM Provider Configuration
+Adhoc supports two types of LLM providers:
+
+1. **Ollama (default)**: Local LLM inference
+   ```bash
+   adhoc init --model "llama3.1"
+   ```
+
+2. **OpenAI-compatible APIs**: Including OpenAI, OpenRouter, LiteLLM, and other model routers
+   ```bash
+   # First initialize with any model name
+   adhoc init --model "gpt-4"
+   
+   # Then configure for OpenAI or other compatible services
+   adhoc config -p openai -k "your-api-key"
+   
+   # For OpenRouter or custom endpoints
+   adhoc config -p openai -k "your-api-key" -e "https://openrouter.ai/api/v1/chat/completions" -m "anthropic/claude-3-opus"
+   ```
 
 ### Committing Changes
 After making changes to your codebase, use the following command to commit those changes and generate explanations:
@@ -95,17 +117,29 @@ adhoc config -d md -u "Your Name"
 **Options**:
 - `-d, --document-format`: Sets the output document format. Accepts `md` for Markdown, `tex` for LaTeX, or `word` for Word documents.
 - `-u, --username`: Sets the author name to be used in the documentation.
+- `-p, --provider`: Sets the LLM provider. Accepts `ollama` (default) or `openai` for OpenAI-compatible APIs.
+- `-k, --api-key`: Sets the API key for OpenAI-compatible services.
+- `-e, --api-endpoint`: Sets a custom API endpoint for model routers (e.g., OpenRouter, LiteLLM).
+- `-m, --model`: Sets the model name to use.
 
 **What it does**:
 - Updates the configuration file (`config.json` in the `.Adhoc` directory) with your preferences.
 - The changes affect how documentation is generated and personalized.
 
-**Example**:
+**Examples**:
 ```bash
+# Configure for local Ollama usage
 adhoc config -d word -u "Shreyas"
+
+# Configure for OpenAI
+adhoc config -p openai -k "your-openai-api-key" -m "gpt-4"
+
+# Configure for OpenRouter (or other OpenAI-compatible model routers)
+adhoc config -p openai -k "your-openrouter-api-key" -e "https://openrouter.ai/api/v1/chat/completions" -m "anthropic/claude-3-opus"
+
+# Configure for LiteLLM or other custom endpoints
+adhoc config -p openai -k "your-api-key" -e "https://your-service.com/v1/chat/completions" -m "your-model"
 ```
-- Sets the output format to Word.
-- Sets the author name to "Shreyas".
 
 ## Requirements
 - Python 3.6 or higher
