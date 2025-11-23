@@ -40,7 +40,7 @@ def _send_to_openai_style_api(prompt, config, model_name):
     api_key = config.get('OPENAI_API_KEY', '')
     
     if not api_key:
-        print("Error: OPENAI_API_KEY is not configured. Please set it using 'adhoc config --api-key YOUR_KEY'")
+        print("Error: OPENAI_API_KEY is not configured. Please set it using 'adhoc config -k YOUR_KEY' or 'adhoc config --api-key YOUR_KEY'")
         return ''
     
     headers = {
@@ -67,7 +67,7 @@ def _send_to_openai_style_api(prompt, config, model_name):
         return ''
     except RequestException as e:
         print(f"Error connecting to OpenAI-style API: {e}")
-        if hasattr(e.response, 'text'):
+        if e.response is not None and hasattr(e.response, 'text'):
             print(f"Response content: {e.response.text}")
         return ''
     except (KeyError, IndexError) as e:
