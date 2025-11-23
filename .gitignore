@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .adhoc/
 adhoc_documentation.tex
+build/
+dist/
+*.egg-info/

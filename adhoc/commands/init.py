@@ -64,7 +64,10 @@ def init_command(args):
             "OLLAMA_API_ENDPOINT": "http://localhost:11434/api/generate/",
             "MODEL_NAME": args.model,
             "OUTPUT_FORMAT": "latex",
-            "AUTHOR_NAME": "Default Author"
+            "AUTHOR_NAME": "Default Author",
+            "LLM_PROVIDER": "ollama",
+            "OPENAI_API_ENDPOINT": "https://api.openai.com/v1/chat/completions",
+            "OPENAI_API_KEY": ""
         }
         with open(CONFIG_FILE_PATH, 'w') as f:
             json.dump(default_config, f, indent=4)

@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: adhoc-python
 Version: 1.0.1
 Summary: Auto Document Codebase Changes in LaTeX, Markdown, or Word
@@ -10,16 +10,34 @@ Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
-Requires-Dist: jinja2>=3.1.4
-Requires-Dist: requests>=2.32.3
-Requires-Dist: watchdog>=5.0.3
-Requires-Dist: python-docx>=1.1.2
-Requires-Dist: ollama
+License-File: LICENSE
+Requires-Dist: jinja2>=3.1.6
+Requires-Dist: requests>=2.32.5
+Requires-Dist: watchdog>=6.0.0
+Requires-Dist: python-docx>=1.2.0
+Requires-Dist: ollama>=0.6.1
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
 
 
 # Adhoc: Auto-Documenting Codebase Changes
 
 Adhoc is a command-line tool designed to automatically document changes in your codebase. By integrating with local language models, it generates detailed explanations of code modifications and compiles them into professional documentation formats such as LaTeX, Markdown, or Word. This tool streamlines the documentation process, making it effortless for developers to maintain up-to-date records of their code evolution.
+
+[![PyPI Downloads](https://static.pepy.tech/badge/adhoc-python)](https://pepy.tech/projects/adhoc-python)
+
+
+Watch the demo video to see Adhoc in action:
+
+![Adhoc Demo](adhoc_demo.gif)
 
 ## Table of Contents
 - [Features](#features)
@@ -35,33 +53,11 @@ Adhoc is a command-line tool designed to automatically document changes in your 
 - [Acknowledgements](#acknowledgements)
 
 ## Features
-- **Automatic Documentation**: Generates explanations for code changes using a Language Learning Model (LLM).
+- **Automatic Documentation**: Generates explanations for code changes using Large Language Models (LLMs).
+- **Multiple LLM Providers**: Supports both local Ollama models and OpenAI-compatible APIs (OpenAI, OpenRouter, LiteLLM, etc.).
 - **Multiple Output Formats**: Supports documentation in LaTeX, Markdown, and Word formats.
 - **Version Control Integration**: Detects code changes and commits through simple commands.
-- **Configurable Settings**: Allowr:
-1. **Consistent Naming Conventions:** The function names and variable names should follow con-
-sistent naming conventions. For example, in ‘classify eeg files‘, all variables start with lowercase letters
-except for the function name which starts with uppercase. Consider making the function name start with
-lowercase to match the variable naming convention. 2. **Constant Values:** There are a few constant
-values like ‘image size‘ and ‘noise threshold‘ that could be defined as named constants. This makes the
-code more readable and maintainable. 3. **Comments:** While there is some commenting in the code,
-adding more comments will make it easier for other developers to understand your thought process and
-any potential issues. 4. **Error Handling:** The code assumes that all files can be processed correctly.
-Adding some error handling mechanisms will ensure robustness against unexpected input or exceptions.
-5. **Type Hints:** Although the function parameters in ‘classify spectra images‘ and ‘classify eeg files‘
-have type hints, the return types are not specified. Adding return types where applicable can make the
-code more self-explanatory. 6. **Function Signatures:** The functions have generic names that may not
-be descriptive enough to understand their purpose from the function signature alone. Consider renaming
-them to something more descriptive. 7. **Global Variables:** Although not necessary in this case, avoid
-using global variables if possible. They can sometimes lead to confusion and harder-to-debug code. 8.
-**Code Organization:** The ‘compute eeg spectra‘ function is called from within the loop where images
-are being processed. Consider moving it outside of the loop for better code organization. 9. **Optimize
-I/O Operations:** There are multiple file operations like reading and writing files in a loop. Consider
-using efficient methods to read/write files, such as using ‘with open‘ context manager or batching multiple
-file operations together. 10. **Documentation:** Adding documentation for the functions can be helpful
-for other developers who may not be familiar with the codebase. This can include descriptions of the
-function parameters and return values where applicable.
-3s customization of output formats and author information via a configuration file.
+- **Configurable Settings**: Allows customization of LLM provider, API keys, output formats, and author information via a configuration file.
 - **Extensible Design**: Modular structure makes it easy to extend functionalities.
 
 ## Installation
@@ -83,6 +79,27 @@ adhoc init --model "your ollama model"
 - Creates a `.Adhoc` directory in your project root to store configurations and databases.
 - Initializes a SQLite database to track code changes.
 - Initializes the whole code to work with your choice of LLM and then generates a codebase summary for context.
+- By default, Adhoc uses Ollama for local LLM inference. You can configure it to use OpenAI-compatible APIs (see Configuration section below).
+
+### LLM Provider Configuration
+Adhoc supports two types of LLM providers:
+
+1. **Ollama (default)**: Local LLM inference
+   ```bash
+   adhoc init --model "llama3.1"
+   ```
+
+2. **OpenAI-compatible APIs**: Including OpenAI, OpenRouter, LiteLLM, and other model routers
+   ```bash
+   # First initialize with any model name
+   adhoc init --model "gpt-4"
+   
+   # Then configure for OpenAI or other compatible services
+   adhoc config -p openai -k "your-api-key"
+   
+   # For OpenRouter or custom endpoints
+   adhoc config -p openai -k "your-api-key" -e "https://openrouter.ai/api/v1/chat/completions" -m "anthropic/claude-3-opus"
+   ```
 
 ### Committing Changes
 After making changes to your codebase, use the following command to commit those changes and generate explanations:
@@ -115,17 +132,29 @@ adhoc config -d md -u "Your Name"
 **Options**:
 - `-d, --document-format`: Sets the output document format. Accepts `md` for Markdown, `tex` for LaTeX, or `word` for Word documents.
 - `-u, --username`: Sets the author name to be used in the documentation.
+- `-p, --provider`: Sets the LLM provider. Accepts `ollama` (default) or `openai` for OpenAI-compatible APIs.
+- `-k, --api-key`: Sets the API key for OpenAI-compatible services.
+- `-e, --api-endpoint`: Sets a custom API endpoint for model routers (e.g., OpenRouter, LiteLLM).
+- `-m, --model`: Sets the model name to use.
 
 **What it does**:
 - Updates the configuration file (`config.json` in the `.Adhoc` directory) with your preferences.
 - The changes affect how documentation is generated and personalized.
 
-**Example**:
+**Examples**:
 ```bash
+# Configure for local Ollama usage
 adhoc config -d word -u "Shreyas"
+
+# Configure for OpenAI
+adhoc config -p openai -k "your-openai-api-key" -m "gpt-4"
+
+# Configure for OpenRouter (or other OpenAI-compatible model routers)
+adhoc config -p openai -k "your-openrouter-api-key" -e "https://openrouter.ai/api/v1/chat/completions" -m "anthropic/claude-3-opus"
+
+# Configure for LiteLLM or other custom endpoints
+adhoc config -p openai -k "your-api-key" -e "https://your-service.com/v1/chat/completions" -m "your-model"
 ```
-- Sets the output format to Word.
-- Sets the author name to "Shreyas".
 
 ## Requirements
 - Python 3.6 or higher
