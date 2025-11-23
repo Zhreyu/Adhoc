@@ -14,11 +14,11 @@ setup(
         ],
     },
     install_requires=[
-        'jinja2>=3.1.4',
-        'requests>=2.32.3',
-        'watchdog>=5.0.3',       # Updated to a compatible version
-        'python-docx>=1.1.2',
-        'ollama'
+        'jinja2>=3.1.6',
+        'requests>=2.32.5',
+        'watchdog>=6.0.0',
+        'python-docx>=1.2.0',
+        'ollama>=0.6.1'
         # Removed 'argparse' as it's part of the standard library for Python >=3.2
     ],
     author='Shreyas S',

@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: adhoc-python
 Version: 1.0.1
 Summary: Auto Document Codebase Changes in LaTeX, Markdown, or Word
@@ -11,6 +11,21 @@ Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Requires-Dist: jinja2>=3.1.6
+Requires-Dist: requests>=2.32.5
+Requires-Dist: watchdog>=6.0.0
+Requires-Dist: python-docx>=1.2.0
+Requires-Dist: ollama>=0.6.1
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
 
 
 # Adhoc: Auto-Documenting Codebase Changes
