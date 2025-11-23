@@ -16,4 +16,7 @@ def load_config():
         config.setdefault("MODEL_NAME", "llama3.1")
         config.setdefault("OUTPUT_FORMAT", "latex")
         config.setdefault("AUTHOR_NAME", "Default Author")
+        config.setdefault("LLM_PROVIDER", "ollama")
+        config.setdefault("OPENAI_API_ENDPOINT", "https://api.openai.com/v1/chat/completions")
+        config.setdefault("OPENAI_API_KEY", "")
     return config

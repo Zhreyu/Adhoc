@@ -38,6 +38,12 @@ def main():
     parser_config.add_argument('-d', '--document-format', type=str, choices=['md', 'tex', 'word'],
                                help='Set the output document format (md, tex, word)')
     parser_config.add_argument('-u', '--username', type=str, help='Set the author username')
+    parser_config.add_argument('-p', '--provider', type=str, choices=['ollama', 'openai'],
+                               help='Set the LLM provider (ollama or openai)')
+    parser_config.add_argument('-k', '--api-key', type=str, help='Set the OpenAI API key')
+    parser_config.add_argument('-e', '--api-endpoint', type=str, 
+                               help='Set the OpenAI API endpoint (for custom model routers)')
+    parser_config.add_argument('-m', '--model', type=str, help='Set the model name')
     parser_config.set_defaults(func=config_command)
 
     # Parse arguments

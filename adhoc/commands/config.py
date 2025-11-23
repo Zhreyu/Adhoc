@@ -22,6 +22,18 @@ def config_command(args):
 
     if args.username:
         config['AUTHOR_NAME'] = args.username
+    
+    if args.provider:
+        config['LLM_PROVIDER'] = args.provider
+    
+    if args.api_key:
+        config['OPENAI_API_KEY'] = args.api_key
+    
+    if args.api_endpoint:
+        config['OPENAI_API_ENDPOINT'] = args.api_endpoint
+    
+    if args.model:
+        config['MODEL_NAME'] = args.model
 
     # Save the updated configuration
     with open(CONFIG_FILE_PATH, 'w') as f:
